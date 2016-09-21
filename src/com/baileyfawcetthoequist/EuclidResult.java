@@ -17,6 +17,9 @@ public class EuclidResult {
     public long v1ns;       //time (nanoseconds) to calculate GDC using Euler's algorithm 1
     public long v2ns;       //time (nanoseconds) to calculate GDC using Euler's algorithm 2 (improved)
 
+    public double v1ms;     //time in milliseconds for original algorithm
+    public double v2ms;     //time for improved algorithm in milliseconds
+
     public EuclidResult(){
         long startTime;     //used for timing the algorithms
         long runningTime;   //used for timing the algorithms
@@ -29,6 +32,7 @@ public class EuclidResult {
         startTime = System.nanoTime();
         gdcV1 = euclidV1(numberOne, numberTwo);
         v1ns = System.nanoTime() - startTime;
+        v1ms = v1ns / 1000000.0;
         //System.out.println("v1: " + runningTime + "ns");
         //v1ms = TimeUnit.MICROSECONDS.convert(runningTime, TimeUnit.NANOSECONDS);
 
@@ -36,6 +40,7 @@ public class EuclidResult {
         startTime = System.nanoTime();
         gdcV2 = euclidV2(numberOne, numberTwo);
         v2ns = System.nanoTime() - startTime;
+        v2ms = v2ns / 1000000.0;
         //System.out.println("v2: " + runningTime + "ns");
         //v2ms = TimeUnit.MICROSECONDS.convert(runningTime, TimeUnit.NANOSECONDS);
 
