@@ -28,7 +28,7 @@ public class Main {
             num2List.add(euclidResults[i].numberTwo);
             gcdV1List.add(euclidResults[i].gdcV1);
             gcdV2List.add(euclidResults[i].gdcV2);
-            v1Runtimes.add(euclidResults[i].v1ms);
+            v1Runtimes.add(euclidResults[i].v1ms); //microseconds
             v2Runtimes.add(euclidResults[i].v2ms);
         }
 
