@@ -14,8 +14,8 @@ public class EuclidResult {
     public long numberTwo;   //randomly generated number, greater than 0 - using long to sidestep overflow problems
     public long gdcV1;       //GDC as calculated by V1
     public long gdcV2;       //GDC as calculated by V2 (should be the same in all cases, but space is cheap so why not...)
-    public long v1ms;       //time to calculate GDC using Euler's algorithm 1
-    public long v2ms;       //time to calculate GDC using Euler's algorithm 2 (improved)
+    public long v1ns;       //time (nanoseconds) to calculate GDC using Euler's algorithm 1
+    public long v2ns;       //time (nanoseconds) to calculate GDC using Euler's algorithm 2 (improved)
 
     public EuclidResult(){
         long startTime;     //used for timing the algorithms
@@ -28,19 +28,19 @@ public class EuclidResult {
         //calculate the GDC using Euclid's algorithm 1, and get the running time while we're at it
         startTime = System.nanoTime();
         gdcV1 = euclidV1(numberOne, numberTwo);
-        runningTime = System.nanoTime() - startTime;
-        System.out.println("v1: " + runningTime + "ns");
-        v1ms = TimeUnit.MICROSECONDS.convert(runningTime, TimeUnit.NANOSECONDS);
+        v1ns = System.nanoTime() - startTime;
+        //System.out.println("v1: " + runningTime + "ns");
+        //v1ms = TimeUnit.MICROSECONDS.convert(runningTime, TimeUnit.NANOSECONDS);
 
         //calculate the GDC using Euclid's algorithm 2
         startTime = System.nanoTime();
         gdcV2 = euclidV2(numberOne, numberTwo);
-        runningTime = System.nanoTime() - startTime;
-        System.out.println("v2: " + runningTime + "ns");
-        v2ms = TimeUnit.MICROSECONDS.convert(runningTime, TimeUnit.NANOSECONDS);
+        v2ns = System.nanoTime() - startTime;
+        //System.out.println("v2: " + runningTime + "ns");
+        //v2ms = TimeUnit.MICROSECONDS.convert(runningTime, TimeUnit.NANOSECONDS);
 
         //for debugging
-        System.out.println(numberOne + " " + numberTwo + " " + gdcV1 + " " + gdcV2 + " " + "v1ms:" +v1ms + "v2ms:" + v2ms);
+        //System.out.println(numberOne + " " + numberTwo + " " + gdcV1 + " " + gdcV2 + " " + "v1ms:" +v1ms + "v2ms:" + v2ms);
     }
 
     /**

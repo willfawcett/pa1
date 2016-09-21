@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Comparator;
+import static java.lang.Math.toIntExact;
 
 public class Main {
     //hello
@@ -28,13 +30,13 @@ public class Main {
             num2List.add(euclidResults[i].numberTwo);
             gcdV1List.add(euclidResults[i].gdcV1);
             gcdV2List.add(euclidResults[i].gdcV2);
-            v1Runtimes.add(euclidResults[i].v1ms); //microseconds
-            v2Runtimes.add(euclidResults[i].v2ms);
+            v1Runtimes.add(euclidResults[i].v1ns);
+            v2Runtimes.add(euclidResults[i].v2ns);
         }
 
-        System.out.format("ORIGINAL STATS\n%-15s\t%-15s\n","Statistics","Milliseconds");
+        System.out.format("ORIGINAL STATS\n%-15s\t%-15s\n","Statistics","Microseconds");
         printTable(v1Runtimes);
-        System.out.format("MODIFIED STATS\n%-15s\t%-15s\n","Statistics","Milliseconds");
+        System.out.format("MODIFIED STATS\n%-15s\t%-15s\n","Statistics","Microseconds");
         printTable(v2Runtimes);
 
 
@@ -47,10 +49,15 @@ public class Main {
             System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",num1List.get(i),num2List.get(i), gcdV2List.get(i), ((float)v2Runtimes.get(i)));
         }
 
+
+
         //SORT the array based on V1 algorithm running time
-
+        Arrays.sort(euclidResults, new Comparator<EuclidResult>() {
+            public int compare(EuclidResult er1, EuclidResult er2) {
+                return toIntExact(er1.v1ns - er2.v1ns);
+            }
+        });
         //Generate stats for V1
-
 
         //SORT the array based on V2 algorithm running time
 
