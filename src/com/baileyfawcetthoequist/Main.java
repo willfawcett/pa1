@@ -38,6 +38,15 @@ public class Main {
         printTable(v2Runtimes);
 
 
+        System.out.format("ORIGINAL\n%-10s\t%-10s\t%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ms)");
+        for(int i = 0; i < 100; i++){
+            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",num1List.get(i),num2List.get(i), gcdV1List.get(i), ((float)v1Runtimes.get(i))/1000);
+        }
+        System.out.format("MODIFIED\n%-10s\t%-10s\t%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ms)");
+        for(int i = 0; i < 100; i++){
+            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",num1List.get(i),num2List.get(i), gcdV2List.get(i), ((float)v2Runtimes.get(i))/1000);
+        }
+
         //SORT the array based on V1 algorithm running time
 
         //Generate stats for V1
@@ -70,7 +79,7 @@ public class Main {
             median = runtimes.get(index)*1.0;
         }
         else{
-            median = (runtimes.get(index) + runtimes.get(index-1))/2000.0;
+            median = (runtimes.get(index) + runtimes.get(index-1))/2.0;
         }
         System.out.format("%-15s\t%-15f\n","Maximum Time",runtimes.get(runtimes.size()-1)/1.0);
         System.out.format("%-15s\t%-15f\n","Minimum Time",runtimes.get(0)/1.0);
