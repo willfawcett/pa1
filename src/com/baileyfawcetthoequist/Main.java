@@ -148,7 +148,7 @@ public class Main {
         int updatev2Count = 0;
         for(int i = 0; i < numberOfTests; i++) {
             EuclidResult e = euclidResults[i];
-            if(e.v1ms > e.v2ms) {
+            if(e.v1RunTime > e.v2RunTime) {
                 updatev2Count += 1;
             }
         }
