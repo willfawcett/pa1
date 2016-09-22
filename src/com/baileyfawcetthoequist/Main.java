@@ -44,6 +44,8 @@ public class Main {
             v2Runtimes.add(euclidResults[i].v2ns);
         }
 
+
+        /*
         System.out.format("\n/ORIGINAL STATS/\n%-15s\t%-15s\n","Statistics","Microseconds");
         printTable(v1Runtimes);
         System.out.format("\n/MODIFIED STATS/\n%-15s\t%-15s\n","Statistics","Microseconds");
@@ -73,7 +75,7 @@ public class Main {
         }
         System.out.format("Out of %d pairs of integers, the modified Euclid's algorithm outperformed the original in %d pairs.", numberOfTests, v2Count);
 
-
+*/
 
 
 
@@ -84,7 +86,7 @@ public class Main {
 
         /***
          *  VERSION 1 STATS
-         */
+         ***/
         //SORT the array based on V1 algorithm running time
         Arrays.sort(euclidResults, new Comparator<EuclidResult>() {
             public int compare(EuclidResult er1, EuclidResult er2) {
@@ -93,22 +95,22 @@ public class Main {
         });
         //Output list and Generate stats for V1
         sum = 0.0;
-        System.out.format("\n/ORIGINAL/\n%-10s\t%-10s\t%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ms)", "Runtime (ns)", "Runtime (ms)");
+        System.out.format("\n/ORIGINAL/\n%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ms)");
         for(int i = 0; i < numberOfTests; i++){
             EuclidResult e = euclidResults[i];
-            sum += e.v1ms;
-            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gcdV1, e.v1ms, e.v1RunTime, e.v1RunTimeMS);
+            sum += e.v1RunTime;
+            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gcdV1, e.v1RunTimeMS);
         }
 
         //get stats for v1 (original algorithm)
-        v1Min = euclidResults[0].v1ns;
-        v1Max = euclidResults[numberOfTests-1].v1ns;
+        v1Min = euclidResults[0].v1RunTime;
+        v1Max = euclidResults[numberOfTests-1].v1RunTime;
         v1Avg = sum / numberOfTests;
-        v1Median = (euclidResults[49].v1ns + euclidResults[50].v1ns) / 2;
+        v1Median = (euclidResults[49].v1RunTime + euclidResults[50].v1RunTime) / 2;
 
         //display stats
         System.out.format("\n/ORIGINAL STATS/ (ms)\n%-10s\t%-10s\t%-10s\t%-10s\n","Min","Max", "Average", "Median");
-        System.out.format("%-10f\t%-10f\t%-10f\t%-10f\n",v1Min / 1000000.0,v1Max / 1000000.0, v1Avg, v1Median / 1000000.0);
+        System.out.format("%-10f\t%-10f\t%-10f\t%-10f\n",v1Min / 1000000.0,v1Max / 1000000.0, v1Avg / 1000000.0, v1Median / 1000000.0);
 
         /***
          * VERSION 2 STATS - still has a bug
@@ -121,22 +123,22 @@ public class Main {
         });
         //Output list and Generate stats for V2
         sum = 0.0;
-        System.out.format("IMPROVED\n%-10s\t%-10s\t%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ms)", "Runtime (ns)", "Runtime (ms)");
+        System.out.format("\n\nIMPROVED\n%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ms)");
         for(int i = 0; i < numberOfTests; i++){
             EuclidResult e = euclidResults[i];
-            sum += e.v2ms;
-            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gcdV2, e.v2ms, e.v2RunTime, e.v2RunTimeMS);
+            sum += e.v2RunTime;
+            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gcdV2, e.v2RunTimeMS);
         }
 
         //get stats for v1 (original algorithm)
-        v2Min = euclidResults[0].v2ns;
-        v2Max = euclidResults[numberOfTests-1].v2ns;
+        v2Min = euclidResults[0].v2RunTime;
+        v2Max = euclidResults[numberOfTests-1].v2RunTime;
         v2Avg = sum / numberOfTests;
-        v2Median = (euclidResults[49].v2ns + euclidResults[50].v2ns) / 2;
+        v2Median = (euclidResults[49].v2RunTime + euclidResults[50].v2RunTime) / 2;
 
         //display stats
-        System.out.format("ORIGINAL STATS (ms)\n%-10s\t%-10s\t%-10s\t%-10s\n","Min","Max", "Average", "Median");
-        System.out.format("%-10f\t%-10f\t%-10f\t%-10f\n",v2Min / 1000000.0,v2Max / 1000000.0, v2Avg, v2Median / 1000000.0);
+        System.out.format("IMPROVED STATS (ms)\n%-10s\t%-10s\t%-10s\t%-10s\n","Min","Max", "Average", "Median");
+        System.out.format("%-10f\t%-10f\t%-10f\t%-10f\n",v2Min / 1000000.0,v2Max / 1000000.0, v2Avg / 1000000.0, v2Median / 1000000.0);
 
         //UPDATED FOR VERSION 2
         //Conclusions section.  So far tells how many times the modified version takes less time than the original version
