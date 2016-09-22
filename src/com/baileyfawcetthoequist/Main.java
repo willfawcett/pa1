@@ -35,11 +35,11 @@ public class Main {
 
         //GENERATE 100 pairs of random integers
         for(int i = 0; i < pairsCount; i++){
-            euclidResults[i] = new EuclidResult(); //GDC is computed and timed in constructor
+            euclidResults[i] = new EuclidResult(); //GCD is computed and timed in constructor
             num1List.add(euclidResults[i].numberOne);
             num2List.add(euclidResults[i].numberTwo);
-            gcdV1List.add(euclidResults[i].gdcV1);
-            gcdV2List.add(euclidResults[i].gdcV2);
+            gcdV1List.add(euclidResults[i].gcdV1);
+            gcdV2List.add(euclidResults[i].gcdV2);
             v1Runtimes.add(euclidResults[i].v1ns);
             v2Runtimes.add(euclidResults[i].v2ns);
         }
@@ -97,7 +97,7 @@ public class Main {
         for(int i = 0; i < pairsCount; i++){
             EuclidResult e = euclidResults[i];
             sum += e.v1ms;
-            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gdcV1, e.v1ms);
+            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gcdV1, e.v1ms);
         }
 
         //get stats for v1 (original algorithm)
@@ -125,7 +125,7 @@ public class Main {
         for(int i = 0; i < pairsCount; i++){
             EuclidResult e = euclidResults[i];
             sum += e.v2ms;
-            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gdcV2, e.v2ms);
+            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gcdV2, e.v2ms);
         }
 
         //get stats for v1 (original algorithm)
