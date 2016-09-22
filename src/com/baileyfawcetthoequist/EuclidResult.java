@@ -1,5 +1,6 @@
 package com.baileyfawcetthoequist;
 import java.util.concurrent.ThreadLocalRandom;
+import static java.lang.Math.toIntExact;
 import java.util.concurrent.TimeUnit;
 import java.util.Comparator;
 /**
@@ -19,6 +20,16 @@ public class EuclidResult {
 
     public double v1ms;     //time in milliseconds for original algorithm
     public double v2ms;     //time for improved algorithm in milliseconds
+
+    //logging runtimes to try to catch a bug
+    public long v1StartTime;
+    public long v1EndTime;
+    public long v1RunTime;
+    public long v2StartTime;
+    public long v2EndTime;
+    public long v2RunTime;
+    public float v1RunTimeMS;
+    public float v2RunTimeMS;
 
     public EuclidResult(){
         long startTime;     //used for timing the algorithms
@@ -53,7 +64,7 @@ public class EuclidResult {
      * returns the GCD of two input integers
      * returns 0 on invalid input
      */
-    static long euclidV1(long a, long b){
+    public long euclidV1(long a, long b){
         long quotient;
         long remainder;
 
@@ -62,12 +73,22 @@ public class EuclidResult {
             return 0;
 
         remainder = -1; //ensure we start with a non-zero remainder
+
+        //log time
+        v1StartTime = System.nanoTime();
+
         while(remainder != 0){
             quotient = a / b;
             remainder = a - quotient * b;  //possibility for overflow error here...
             a = b;
             b = remainder;
         }
+
+        //log time
+        v1EndTime = System.nanoTime();
+        v1RunTime = v1EndTime - v1StartTime;
+        v1RunTimeMS = v1RunTime / 1000000.0f;
+
         return a; //this is the GCD
     }
 
@@ -76,7 +97,7 @@ public class EuclidResult {
      * returns the GCD of two input integers
      * returns 0 on invalid input
      */
-    static long euclidV2(long a, long b){
+    public long euclidV2(long a, long b){
         long remainder;
 
         //make sure both inputs are greater than 0
@@ -91,6 +112,10 @@ public class EuclidResult {
         }
 
         remainder = -1; //start remainder at non-zero
+
+        //log start time
+        v2StartTime = System.nanoTime();
+
         while(remainder != 0){
             remainder = a - b;
             if(remainder >= b){
@@ -105,6 +130,12 @@ public class EuclidResult {
             a = b;
             b = remainder;
         }
+
+         //log end time and runtime
+        v2EndTime = System.nanoTime();
+        v2RunTime = v2EndTime - v2StartTime;
+        v2RunTimeMS = v2RunTime / 1000000.0f;
+
         return a;  //this is the GCD
     }
 

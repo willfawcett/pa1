@@ -30,11 +30,11 @@ public class Main {
         // write your code here
         System.out.println("~EUCLIDS COMPARATOR~\n");
 
-        int pairsCount = 100;
-        EuclidResult[] euclidResults = new EuclidResult[pairsCount];
+        int numberOfTests = 100;
+        EuclidResult[] euclidResults = new EuclidResult[numberOfTests];
 
         //GENERATE 100 pairs of random integers
-        for(int i = 0; i < pairsCount; i++){
+        for(int i = 0; i < numberOfTests; i++){
             euclidResults[i] = new EuclidResult(); //GCD is computed and timed in constructor
             num1List.add(euclidResults[i].numberOne);
             num2List.add(euclidResults[i].numberTwo);
@@ -51,11 +51,11 @@ public class Main {
 
 
         System.out.format("\n/ORIGINAL/\n%-10s\t%-10s\t%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ns)");
-        for(int i = 0; i < pairsCount; i++){
+        for(int i = 0; i < numberOfTests; i++){
             System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",num1List.get(i),num2List.get(i), gcdV1List.get(i), ((float)v1Runtimes.get(i)));
         }
         System.out.format("\n/MODIFIED/\n%-10s\t%-10s\t%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ns)");
-        for(int i = 0; i < pairsCount; i++){
+        for(int i = 0; i < numberOfTests; i++){
             System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",num1List.get(i),num2List.get(i), gcdV2List.get(i), ((float)v2Runtimes.get(i)));
         }
 
@@ -64,14 +64,14 @@ public class Main {
         //Prints the conclusion to the screen
         System.out.format("\n/CONCLUSIONS/\n");
         int v2Count = 0;
-        for(int i = 0; i < pairsCount; i++) {
+        for(int i = 0; i < numberOfTests; i++) {
             float a = ((float)v1Runtimes.get(i));
             float b = ((float)v2Runtimes.get(i));
             if(a > b) {
                 v2Count += 1;
             }
         }
-        System.out.format("Out of %d pairs of integers, the modified Euclid's algorithm outperformed the original in %d pairs.", pairsCount, v2Count);
+        System.out.format("Out of %d pairs of integers, the modified Euclid's algorithm outperformed the original in %d pairs.", numberOfTests, v2Count);
 
 
 
@@ -88,22 +88,22 @@ public class Main {
         //SORT the array based on V1 algorithm running time
         Arrays.sort(euclidResults, new Comparator<EuclidResult>() {
             public int compare(EuclidResult er1, EuclidResult er2) {
-                return toIntExact(er1.v1ns - er2.v1ns);
+                return toIntExact(er1.v1RunTime - er2.v1RunTime);
             }
         });
         //Output list and Generate stats for V1
         sum = 0.0;
-        System.out.format("\n/ORIGINAL/\n%-10s\t%-10s\t%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ms)");
-        for(int i = 0; i < pairsCount; i++){
+        System.out.format("\n/ORIGINAL/\n%-10s\t%-10s\t%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ms)", "Runtime (ns)", "Runtime (ms)");
+        for(int i = 0; i < numberOfTests; i++){
             EuclidResult e = euclidResults[i];
             sum += e.v1ms;
-            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gcdV1, e.v1ms);
+            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gcdV1, e.v1ms, e.v1RunTime, e.v1RunTimeMS);
         }
 
         //get stats for v1 (original algorithm)
         v1Min = euclidResults[0].v1ns;
-        v1Max = euclidResults[pairsCount-1].v1ns;
-        v1Avg = sum / pairsCount;
+        v1Max = euclidResults[numberOfTests-1].v1ns;
+        v1Avg = sum / numberOfTests;
         v1Median = (euclidResults[49].v1ns + euclidResults[50].v1ns) / 2;
 
         //display stats
@@ -116,22 +116,22 @@ public class Main {
         //RE-SORT the array based on V2 algorithm running time
         Arrays.sort(euclidResults, new Comparator<EuclidResult>() {
             public int compare(EuclidResult er1, EuclidResult er2) {
-                return toIntExact(er1.v2ns - er2.v2ns);
+                return toIntExact(er1.v2RunTime - er2.v2RunTime);
             }
         });
         //Output list and Generate stats for V2
         sum = 0.0;
-        System.out.format("IMPROVED\n%-10s\t%-10s\t%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ms)");
-        for(int i = 0; i < pairsCount; i++){
+        System.out.format("IMPROVED\n%-10s\t%-10s\t%-10s\t%-10s\n","Number One","Number Two", "GCD", "Runtime (ms)", "Runtime (ns)", "Runtime (ms)");
+        for(int i = 0; i < numberOfTests; i++){
             EuclidResult e = euclidResults[i];
             sum += e.v2ms;
-            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gcdV2, e.v2ms);
+            System.out.format("%-10d\t%-10d\t%-10d\t%-10f\t%-10d\t%-10f\n",e.numberOne,e.numberTwo, e.gcdV2, e.v2ms, e.v2RunTime, e.v2RunTimeMS);
         }
 
         //get stats for v1 (original algorithm)
         v2Min = euclidResults[0].v2ns;
-        v2Max = euclidResults[pairsCount-1].v2ns;
-        v2Avg = sum / pairsCount;
+        v2Max = euclidResults[numberOfTests-1].v2ns;
+        v2Avg = sum / numberOfTests;
         v2Median = (euclidResults[49].v2ns + euclidResults[50].v2ns) / 2;
 
         //display stats
@@ -144,13 +144,13 @@ public class Main {
         //Prints the conclusion to the screen
         System.out.format("\n/CONCLUSIONS/\n");
         int updatev2Count = 0;
-        for(int i = 0; i < pairsCount; i++) {
+        for(int i = 0; i < numberOfTests; i++) {
             EuclidResult e = euclidResults[i];
             if(e.v1ms > e.v2ms) {
                 updatev2Count += 1;
             }
         }
-        System.out.format("Out of %d pairs of integers, the modified Euclid's algorithm outperformed the original in %d pairs.", pairsCount, updatev2Count);
+        System.out.format("Out of %d pairs of integers, the modified Euclid's algorithm outperformed the original in %d pairs.", numberOfTests, updatev2Count);
 
 
 
